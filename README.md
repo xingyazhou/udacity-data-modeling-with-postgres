@@ -47,14 +47,14 @@ Run test.ipynb to confirm your records were successfully inserted into each tabl
 
 ## Instruction
 
-1. use following command to create tables
-    python create_tables.py
+1. use following command to create tables <br>
+    python create_tables.py <br> 
     
-2. Insert data to each table (ETL pipeline)
-    python etl.py
+2. Insert data to each table (ETL pipeline) <br>
+    python etl.py <br> 
     
-3. Chect the database
-    test.ipynb
+3. Chect the database <br>
+    test.ipynb <br> 
     
 ## Author
 
