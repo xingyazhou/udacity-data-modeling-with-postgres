@@ -22,14 +22,14 @@ Each file is in JSON format and contains metadata about a song and the artist of
 
 ## Project Files
 
-In addition to the data files, the project workspace includes six files:
+In addition to the data files, the project workspace includes 7 files:
 
-**test.ipynb**  displays the first few rows of each table to check the database.
-**create_tables.py**  drops and creates tables. Run this file to reset  tables before each time you run your ETL scripts.
-**etl.ipynb**  reads and processes a single file from song_data and log_data and loads the data into your tables. This notebook contains detailed instructions on the ETL process for each of the tables.
-**etl.py**  reads and processes files from song_data and log_data and loads them into your tables. 
-**sql_queries.py**  contains all sql queries, and is imported into the last three files above.
-**run.ipynb**  run **create_tables.py** and **etl.py** from notebook
+**test.ipynb**  displays the first few rows of each table to check the database. <br>
+**create_tables.py**  drops and creates tables. Run this file to reset  tables before each time you run your ETL scripts. <br>
+**etl.ipynb**  reads and processes a single file from song_data and log_data and loads the data into your tables. This notebook contains detailed instructions on the ETL process for each of the tables.<br>
+**etl.py**  reads and processes files from song_data and log_data and loads them into your tables. <br>
+**sql_queries.py**  contains all sql queries, and is imported into the last three files above.<br>
+**run.ipynb**  run **create_tables.py** and **etl.py** from notebook<br>
 **README.md** provides project info
 
 ## Build ETL Processes
