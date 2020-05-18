@@ -17,7 +17,7 @@ Each file is in JSON format and contains metadata about a song and the artist of
 
 ## Data Modeling with Star Schema
 
-![Star Schema for Song Play Analysis!](/home/workspace/starschema/song_play_analysis_with_star_schema.png "Star Schema for Song Play Analysis")
+![Star Schema for Song Play Analysis!](./song_play_analysis_with_star_schema.png "Star Schema for Song Play Analysis")
 
 
 ## Project Files
