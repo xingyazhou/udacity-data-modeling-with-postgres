@@ -6,6 +6,16 @@ from sql_queries import *
 
 
 def process_song_file(cur, filepath):
+    """ Read song data json file and insert values to songs table, artists table
+
+    Arguments:
+            cur {object}: Allows Python code to execute PostgreSQL command in a database session
+            filepath {str}: specify the path of the song data json files
+
+    Returns:
+            No return values
+    """
+       
     # open song file
     df =  pd.read_json(filepath,lines=True)
 
@@ -19,6 +29,16 @@ def process_song_file(cur, filepath):
 
 
 def process_log_file(cur, filepath):
+    """ Read log data json file and insert values to users table, time table and songplays table
+
+    Arguments:
+            cur {object}: Allows Python code to execute PostgreSQL command in a database session
+            filepath {str}: specify the path of the log data json files
+
+    Returns:
+            No return values
+    """
+    
     # open log file
     df = pd.read_json(filepath,lines=True)
 
@@ -72,6 +92,18 @@ def process_log_file(cur, filepath):
 
 
 def process_data(cur, conn, filepath, func):
+    """ Processing song/log data json files 
+
+    Arguments:
+            cur {object}: Allows Python code to execute PostgreSQL command in a database session
+            conn {object}: the sparkifydb database connection object
+            filepath {str}: the path of the song/log data
+            func (function): the data processing function
+
+    Returns:
+            No return values
+    """
+    
     # get all files matching extension from directory
     all_files = []
     for root, dirs, files in os.walk(filepath):
@@ -91,14 +123,15 @@ def process_data(cur, conn, filepath, func):
 
 
 def main():
+    """Connecting to database sparkifydb"""
     conn = psycopg2.connect("host=127.0.0.1 dbname=sparkifydb user=student password=student")
     cur = conn.cursor()
 
+    """Processing the data files"""
     process_data(cur, conn, filepath='data/song_data', func=process_song_file)
     process_data(cur, conn, filepath='data/log_data', func=process_log_file)
 
     conn.close()
-
 
 if __name__ == "__main__":
     main()

@@ -8,19 +8,23 @@ time_table_drop = "DROP table  IF EXISTS time"
 
 # CREATE TABLES
 
+# song_id and artist_id could be Null since our sub dataset is imcomplete 
+# Since this is a subset of the much larger dataset, the sub dataset will only have 1 row with values for value containing ID 
+# for both song_id and artist_id in the fact table. Those are the only 2 values that the query in the sql_queries.py 
+# will return that are not-NONE. The rest of the rows will have NONE values for those two variables.
 songplay_table_create = ("""create table if not exists 
     songplays
     (
-    songplay_id int,
-    start_time varchar, 
-    user_id int,
-    level varchar,
+    songplay_id SERIAL,
+    start_time varchar NOT NULL, 
+    user_id int NOT NULL,
     song_id varchar,
     artist_id varchar,
-    session_id int,
+    level varchar,
+    session_id int NOT NULL,
     location varchar,
     user_agent varchar,
-    PRIMARY KEY (start_time, user_id)
+    PRIMARY KEY (start_time, user_id)        
     )
 """)
 
@@ -40,7 +44,7 @@ song_table_create = ("""create table if not exists
     (
     song_id varchar PRIMARY KEY,
     title varchar,
-    artist_id varchar, 
+    artist_id varchar NOT NULL, 
     year int,
     duration float
     )
@@ -85,10 +89,12 @@ user_table_insert = ("""INSERT INTO
     user_id,
     first_name,
     last_name,
-    gender,level
+    gender,
+    level
     )
     VALUES (%s,%s,%s,%s,%s)
-    ON CONFLICT DO NOTHING
+    ON CONFLICT (user_id)
+    DO UPDATE SET level = EXCLUDED.level;
 """)
 
 song_table_insert =  ("""
@@ -139,13 +145,11 @@ time_table_insert = ("""
 
 # FIND SONGS
 
-song_select = (""" 
-SELECT 
-    song_id,
-    artist_id 
-FROM
-    songs
-WHERE title=%s and duration=%s and artist_id IN (SELECT artist_id from artists where name=%s) 
+song_select = ("""
+    SELECT s.song_id, a.artist_id FROM songs as s
+    LEFT JOIN artists as a 
+    ON a.artist_id = s.artist_id
+    WHERE title = %s and duration=%s and name = %s 
 """)
 
 # QUERY LISTS
