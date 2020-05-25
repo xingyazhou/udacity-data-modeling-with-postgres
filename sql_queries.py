@@ -80,7 +80,6 @@ time_table_create = ("""create table if not exists
 songplay_table_insert = ("""INSERT INTO 
     songplays
     (
-        songplay_id,
         start_time,
         user_id,
         level,
@@ -90,7 +89,7 @@ songplay_table_insert = ("""INSERT INTO
         location,
         user_agent
     )
-    VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)
+    VALUES (%s,%s,%s,%s,%s,%s,%s,%s)
     ON CONFLICT DO NOTHING
 """)
 
